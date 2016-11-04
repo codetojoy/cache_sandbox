@@ -1,0 +1,33 @@
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "com.acme.Runner"
+def stagingDir = "staging"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.hibernate:hibernate-core:4.3.6.Final'
+    compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile 'com.google.guava:guava:20.0'
+
+    testCompile 'junit:junit:4.12'
+
+    runtime 'org.hibernate:hibernate-core:4.3.6.Final'
+    runtime 'org.hibernate:hibernate-entitymanager:4.3.10.Final'
+    runtime 'org.slf4j:slf4j-simple:1.7.7'
+    runtime 'org.javassist:javassist:3.15.0-GA'
+    runtime files("${System.env.HSQLDB_HOME}/lib/hsqldb.jar")
+}
+
+installDist.doFirst {
+    ant.delete(dir: stagingDir)
+}
+
+installDist {
+    into stagingDir
+}
+
