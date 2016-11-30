@@ -2,7 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "com.acme.Runner"
+mainClassName = "com.acme.Runner2"
 def stagingDir = "staging"
 
 repositories {
