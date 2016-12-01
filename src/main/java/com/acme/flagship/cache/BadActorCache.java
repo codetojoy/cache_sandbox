@@ -9,6 +9,8 @@ import com.google.common.cache.*;
 public class BadActorCache {
     private Cache<String, AtomicInteger> cache;
     private int threshold;
+
+    private CacheStatsLogger cacheStatsLogger = new CacheStatsLogger("BadActor");
  
     public BadActorCache() {
         threshold = 10;
@@ -17,10 +19,6 @@ public class BadActorCache {
                 .expireAfterAccess(20, TimeUnit.SECONDS)
                 .recordStats()
                 .build();
-    }
-
-    public CacheStats getStats() {
-        return cache.stats();
     }
 
     public boolean isRequestFromBadActor(String actorName) {
@@ -42,6 +40,8 @@ public class BadActorCache {
                 cache.put(actorName, count);
                 System.out.println("TRACER BAD CACHE NEW actor: " + actorName);
             }
+
+            cacheStatsLogger.fetch(cache.stats());
         } catch(Exception ex) {
             System.err.println("ERROR: caught exception");
         }

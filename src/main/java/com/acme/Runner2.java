@@ -16,8 +16,8 @@ public class Runner2 {
 
         final String prefix = "Name_";
         Actor slowActor1 = new SlowActor(prefix + "11");
-        Actor slowActor2 = new SlowActor(prefix + "12");
-        Actor slowActor3 = new SlowActor(prefix + "13");
+        Actor slowActor2 = new SlowActor(prefix + "22");
+        Actor slowActor3 = new SlowActor(prefix + "33");
 
         slowActor1.go(new DaoAction(badActorCache, accountCache, accountDao));
         slowActor2.go(new DaoAction(badActorCache, accountCache, accountDao));
